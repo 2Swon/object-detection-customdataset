@@ -6,4 +6,5 @@
 (tensorflow, keras, python 사용)
 
 # 활용 방법
-<img src="https://github.com/2Swon/DeepLearning/blob/main/Project/스탑모션/img/1.png">
+<img src="https://github.com/2Swon/DeepLearning/blob/main/Project/스탑모션/img/1.png" alt="1" style="max-width: 100%;"><br>
+<img src="https://github.com/2Swon/web_practice/blob/main/howLOLwell/img/1.png" alt="1" style="max-width: 100%;"><br>
