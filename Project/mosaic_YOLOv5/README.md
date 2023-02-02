@@ -19,161 +19,79 @@
 깃허브 clone
 
 ```python
+#데이터셋 다운로드
 !pip install roboflow
-from roboflow import Roboflow
-#칼 데이터셋 다운로드
-rf = Roboflow(api_key="krcQlWTnG5PUWdI1yzWt")
-project = rf.workspace("augustus").project("knife_dataset-kysbg")
-dataset = project.version(2).download("yolov5")
-#담배 데이터셋 다운로드
-project = rf.workspace("cigarettesmokingdetection").project("cigarette-detection-uyqvc")
-dataset = project.version(1).download("yolov5")
 
-#얼굴 데이터셋 다운로드
-project = rf.workspace("mohamed-traore-2ekkp").project("face-detection-mik1i")
-dataset = project.version(20).download("yolov5")
+from roboflow import Roboflow
+rf = Roboflow(api_key="krcQlWTnG5PUWdI1yzWt")
+project = rf.workspace("license-plate-mhig5").project("license-plate-7egee")
+dataset = project.version(5).download("yolov5")
 ```
 
-다양한 데이터셋 다운로드 후 데이터셋 통합
+데이터셋 다운로드
+
+```
+names: ["LP"]
+nc: 1
+train: ./license-plate-5/train/images'
+val: ./license-plate-5/valid/images
+test: ./license-plate-5/test/images
+```
+
+data.yaml 파일 설정
 
 
 
 ### 2. detect.py
 
-##### 2.1 파라미터 변경
-
-```python
- import ast #list형식을 arg로 받기 위한 라이브러리
-...
-
-def run(
-        ...
-        hide_annotation=False,
-        ...
-        option=[]
-):
-
-...
-
-
-def arg_as_list(s):
-    v = ast.literal_eval(s)
-    if type(v) == list:
-        return v
-    else :
-        return []
-
-def parse_opt():
-    ...
-    parser.add_argument('--hide-annotation', default=False, action='store_true', help='hide annotation')#바운딩박스 출력 여부 결정 (False=출력)   
-    ...
-    parser.add_argument('--option', type=arg_as_list, default=[], help='mosaic object list([]=mosaic all,[-1]=nothing)')#모자이크 옵션 설정
-    
-    opt = parser.parse_args()
-    opt.imgsz *= 2 if len(opt.imgsz) == 1 else 1  # expand
-    print_args(vars(opt))
-    return opt
-```
-
-##### 2.2 run 함수
-
-```
-mosaic_list = [] #각 객체별모자이크 처리 여부
-
-    for i in range(len(names)):
-        mosaic_list.append(0)
-    
-    if len(option)==0:
-        for i in range(len(mosaic_list)):
-            mosaic_list[i] = 1
-    else :
-        for i in range(len(option)):
-            if (0 <= option[i] <len(names)):
-                mosaic_list[option[i]] = 1
-```
-
-모자이크를 처리할 객체들의 정보를 저장
-
 ```py
-		coord = [] #각 객체에 대한 좌표 x1,y1,x2,y2
 		blurratio = 40 # blur강도 설정
-		if len(det):
+            if len(det):
                 # Rescale boxes from img_size to im0 size
                 det[:, :4] = scale_boxes(im.shape[2:], det[:, :4], im0.shape).round()
 
                 # Print results
-                for c in det[:, 5].unique():
+
+                for c in det[:, 5].unique():  # 객체 개수 출력
                     n = (det[:, 5] == c).sum()  # detections per class
                     s += f"{n} {names[int(c)]}{'s' * (n > 1)}, "  # add to string
 
-                m = im0.copy()  ##모자이크 이미지를 만들어주기 위해 이미지를 줄이고 키움
-                blur = cv2.blur(m, (blurratio, blurratio))
-                m = blur
+                    # Write results
 
-                # Write results
-                for *xyxy, conf, cls in reversed(det):
-                    if save_txt:  # Write to file
+                    for *xyxy, conf, cls in reversed(det):
+                        ##모자이크 처리부분
+                        crop_obj = im0[int(xyxy[1]):int(xyxy[3]), int(xyxy[0]):int(xyxy[2])]
+                        blur = cv2.blur(crop_obj, (blurratio, blurratio))
+                        im0[int(xyxy[1]):int(xyxy[3]), int(xyxy[0]):int(xyxy[2])] = blur
+
+                    if save_txt:  # Write to file 각 객체의 클래스 정보 좌표 정보 저장
                         xywh = (xyxy2xywh(torch.tensor(xyxy).view(1, 4)) / gn).view(-1).tolist()  # normalized xywh
                         line = (cls, *xywh, conf) if save_conf else (cls, *xywh)  # label format
                         with open(f'{txt_path}.txt', 'a') as f:
                             f.write(('%g ' * len(line)).rstrip() % line + '\n')
-
                     if save_img or save_crop or view_img:  # Add bbox to image
                         c = int(cls)  # integer class
-                        if mosaic_list[c]==1:
-                            coord.append(xyxy)
-                        label = None if hide_labels else (names[c] if hide_conf else f'{names[c]} {conf:.2f}')
-                        if hide_annotation == False:
-                            annotator.box_label(xyxy, label, color=colors(c, True))  # 바운딩 박스 표시
+                        label = None if hide_labels else (names[c] if hide_conf else f'{names[c]}{conf:.2f}')  # 바운딩박스
+                        annotator.box_label(xyxy, label, color=colors(c, True))  # 바운딩 박스 표시
                     if save_crop:
                         save_one_box(xyxy, imc, file=save_dir / 'crops' / names[c] / f'{p.stem}.jpg', BGR=True)
 ```
 
-mosaic_list 가 1인 index의 좌표값만 coor[]에 저장
+원본이미지를 카피한 후 추출된 xyxy좌표를 blur처리해줌
 
-hide_annotation이 False이면 label과 바운딩박스 표시
+
+
+### 3. train
 
 ```python
-            #blur 처리 
-            for i in range(len(coord)):
-                for k in range(len(coord[i])):
-                    coord[i][k] = int(coord[i][k])
-                im0[coord[i][1]:coord[i][3], coord[i][0]:coord[i][2], :] = m[coord[i][1]:coord[i][3], coord[i][0]:coord[i][2], :]
-```
-
-mosaic처리를 해야하는 좌표값을 불러온 후
-
-blur처리된 좌표값 전달
-
-### 3. 결과 사진
-
-##### 3.1 option [] (모두 모자이크처리)
-
-```
-!python detect.py --weights best.pt --conf 0.4 --source 0 --option []
+!python detect.py --weights /best.pt --img 416 --conf 0.4 --source (이미지 or 동영상 경로)
 ```
 
 
 
-##### 3.2 option[0, 1] (흉기, 담배 모자이크 처리)
-
-```
-!python detect.py --weights best.pt --conf 0.4 --source 0 --option [0,1]
-```
+#### 4. 결과
 
 
-
-##### 3.3 hide-annotation (바운딩박스 정보 숨기기)
-
-```
-!python detect.py --weights best.pt --conf 0.4 --source 0 --option [] --hide-annotation
-```
-
-
-
-
-
-## 결과
 
 <img src="https://github.com/2Swon/DeepLearing/blob/main/Project/mosaic_YOLOv5/img/2.png" alt="1">
 
