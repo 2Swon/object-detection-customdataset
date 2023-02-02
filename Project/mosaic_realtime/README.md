@@ -44,11 +44,10 @@ dataset = project.version(20).download("yolov5")
 
 ### 2. detect.py
 
-##### 2.1 파라미터 변경
+##### 2.1 파라미터 
 
 ```python
- import ast #list형식을 arg로 받기 위한 라이브러리
-...
+
 
 def run(
         ...
@@ -57,15 +56,6 @@ def run(
         option=[]
 ):
 
-...
-
-
-def arg_as_list(s):
-    v = ast.literal_eval(s)
-    if type(v) == list:
-        return v
-    else :
-        return []
 
 def parse_opt():
     ...
