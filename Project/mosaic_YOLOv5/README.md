@@ -66,3 +66,10 @@ dataset = project.version(5).download("yolov5")
 검출된 객체의 xyxy 좌표를 cv2.blur 처리를 해주었습니다.
 
 blurratio는 40으로 설정해주었습니다.
+
+
+
+## 결과
+
+<img src="C:\Users\SeongWon\OneDrive\문서\GitHub\DeepLearing\Project\mosaic_YOLOv5\img">
+
