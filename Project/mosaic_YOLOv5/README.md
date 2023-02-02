@@ -69,6 +69,16 @@ blurratio는 40으로 설정해주었습니다.
 
 
 
+### 3. train
+
+```
+!python detect.py --weights best.pt --img 416 --conf 0.4 --source (원하는 동영상 경로)
+```
+
+train된 모델을 불러와서 학습시켜주면 됩니다.
+
+
+
 ## 결과
 
 <img src="C:\Users\SeongWon\OneDrive\문서\GitHub\DeepLearing\Project\mosaic_YOLOv5\img">
