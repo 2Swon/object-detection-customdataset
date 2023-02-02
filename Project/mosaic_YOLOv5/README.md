@@ -6,7 +6,7 @@
 
 객체 탐지 모델로는 YOLOv5모델을 사용하였습니다.
 
-### 1. 사용 방법
+### 1. 사용 방법 yolo_carnum.ipynb
 
 ```python
 #yolo 깃허브 clone
