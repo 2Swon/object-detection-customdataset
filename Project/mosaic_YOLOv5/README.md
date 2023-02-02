@@ -81,5 +81,5 @@ train된 모델을 불러와서 학습시켜주면 됩니다.
 
 ## 결과
 
-<img src="C:\Users\SeongWon\OneDrive\문서\GitHub\DeepLearing\Project\mosaic_YOLOv5\img">
+<img src="https://github.com/2Swon/DeepLearing/blob/main/Project/mosaic_YOLOv5/img/2.png" alt="1">
 
