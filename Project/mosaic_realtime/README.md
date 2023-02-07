@@ -10,7 +10,7 @@
 
 class : 0 = knife, 1 = smoking, 2 = face
 
-### 1. 사용 방법 yolo_carnum.ipynb
+### 1. 사용 방법 yolo_mosaic.ipynb
 
 ```python
 #yolo 깃허브 clone
