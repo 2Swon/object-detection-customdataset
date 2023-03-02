@@ -59,9 +59,13 @@ Puzzle Mix는 지역 통계를 보존하면서 각 데이터의 두드러진 정
 
 
 
+<img src="https://github.com/2Swon/DeepLearing/blob/main/paper_review/CycleMIx/images/table3.png">
 
+위의 사진을 보면 Scribble만 있는 데이터셋임에도 불구하고 성능이 가장 좋다.
 
+<img src="https://github.com/2Swon/DeepLearing/blob/main/paper_review/CycleMIx/images/table4.png">
 
+unmix sample, mix sample, random occlusion, local consistency loss, global consistency loss을 모두 사용했을때 AVG가 제일 높은 것을 알 수 있다. 
 
 
 
