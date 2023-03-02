@@ -10,7 +10,7 @@
 
 이 논문에서 집중하는 Scribble 이란 annotate가 덜된 형태이다. scribble 데이터는 쉽게 얻을 수 있지만 Supervision에는 제한된다.
 
-이러한 문제를 해결하기위해 증강 기법인 mix augmentation과 오차 함수 cycle consistency loss를 결합한 
+이러한 문제를 해결하기위해 증강 기법인 mix augmentation과 cycle consistency loss를 결합한 
 
 CycleMix라는 새로운 프레임워크를 제안했다.
 
