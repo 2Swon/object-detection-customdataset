@@ -48,6 +48,8 @@ local loss 는 예측과 원본 이미지의 유사도를 이용한다.
 
 Puzzle Mix는 지역 통계를 보존하면서 각 데이터의 두드러진 정보를 최대화하는 방법이다.
 
+<img src="https://github.com/2Swon/DeepLearing/blob/main/paper_review/CycleMIx/images/22.gif">
+
 사용방법
 1. data의 saliency map을 계산한다.
 2. down-sampled 후에 saliency map을 계산한다.
