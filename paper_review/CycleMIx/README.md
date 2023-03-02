@@ -24,9 +24,9 @@ consistency loss를 사용한다. consistency loss는 segmentation에서 상당�
 
 다음은 CycleMix에 핵심 내용인 mix augmentation과 cycle consistency에 대한 사진이다.
 
-<h5>
+<h4>
     CycleMix 기본 구조
-<h5>
+<h4>
 <img src="https://github.com/2Swon/DeepLearing/blob/main/paper_review/CycleMIx/images/figure1_a.png" width=80%>
 <img src="https://github.com/2Swon/DeepLearing/blob/main/paper_review/CycleMIx/images/figure1_b.png" width=80%>
 
@@ -44,17 +44,17 @@ WSL(weak supervision learning)은 희미하거나 nosiy한 labels을 활용하�
 global loss 는 원본 이미지와 mix 이미지에 일관성 없는 부분에 불이익을 주는 반면
 
 local loss 는 예측과 원본 이미지의 유사도를 이용한다.
-<h5>
+<h4>
     CycleMix 전체 구조
-<h5>
+<h4>
 <img src="https://github.com/2Swon/DeepLearing/blob/main/paper_review/CycleMIx/images/figure3.png" width=70%>
 
 이 그림은 CycleMix 모델의 구조이다. mix augmentation은 Puzzle Mix를 사용했다.
 
 Puzzle Mix는 지역 통계를 보존하면서 각 데이터의 두드러진 정보를 최대화하는 방법이다.
-<h5>
+<h4>
     Puzzle Mix 과정
-<h5>
+<h4>
 <img src="https://github.com/2Swon/DeepLearing/blob/main/paper_review/CycleMIx/images/22.gif" width=50%>
 
 사용방법
@@ -65,9 +65,9 @@ Puzzle Mix는 지역 통계를 보존하면서 각 데이터의 두드러진 정
 
 
 
-<h5>
+<h4>
     CycleMix 성능 지표
-<h5>
+<h4>
 <img src="https://github.com/2Swon/DeepLearing/blob/main/paper_review/CycleMIx/images/table3.png" width=60%>
 
 위의 사진을 보면 Scribble만 있는 데이터셋임에도 불구하고 성능이 가장 좋다.
