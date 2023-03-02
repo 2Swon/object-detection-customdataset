@@ -35,8 +35,8 @@ consistency loss를 사용한다. consistency loss는 segmentation에서 상당�
 
 다음은 CycleMix에 핵심 내용인 mix agmentation과 cycle consistency에 대한 사진이다.
 
-<img src="https://github.com/2Swon/DeepLearing/edit/main/paper_review/CycleMIx/images/figrue1_a">
-<img src="https://github.com/2Swon/DeepLearing/edit/main/paper_review/CycleMIx/images/figrue1_b">
+<img src="https://github.com/2Swon/DeepLearing/edit/main/paper_review/CycleMIx/images/figrue1_a.png">
+<img src="https://github.com/2Swon/DeepLearing/edit/main/paper_review/CycleMIx/images/figrue1_b.png">
 
 
 WSL(weak supervision learning)은 희미하거나 nosiy한 labels을 활용하도록 제안된다.
@@ -47,7 +47,7 @@ WSL(weak supervision learning)은 희미하거나 nosiy한 labels을 활용하�
 
 이 힘들며, 이는 경계를 명확하게 segmentation하지 못한다.
 
-
+<img src="https://github.com/2Swon/DeepLearing/edit/main/paper_review/CycleMIx/images/figrue2.png">
 
 scribble learning은 두 단계가 있다.
 
