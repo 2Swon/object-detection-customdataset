@@ -44,7 +44,17 @@ local loss 는 예측과 원본 이미지의 유사도를 이용한다.
 
 <img src="https://github.com/2Swon/DeepLearing/blob/main/paper_review/CycleMIx/images/figure3.png">
 
-이 그림은 CycleMix 모델의 구조이다. 
+이 그림은 CycleMix 모델의 구조이다. mix augmentation은 Puzzle Mix를 사용했다.
+
+Puzzle Mix는 지역 통계를 보존하면서 각 데이터의 두드러진 정보를 최대화하는 방법이다.
+
+사용방법
+1. data의 saliency map을 계산한다.
+2. down-sampled 후에 saliency map을 계산한다.
+3. saliency를 기반으로 mix된 data의 각 위치에 비율에 맞는 label을 할당해준다.
+4. 각 입력에 대해 transport를 수행하여 최대화 한다.
+
+
 
 
 
